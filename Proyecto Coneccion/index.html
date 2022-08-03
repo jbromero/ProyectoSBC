@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Forest</title>
+    <link rel="icon" href="assets/img/icono.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="assets/img/icono.png" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<nav class="navbar bg-light">
+    
+    <div class="container-fluid">
+        <a class="navbar-brand" href="grafod3/grafo.html">
+            <img src="assets/img/Logo.png" alt="" width="150" height="40">
+        </a>
+        <form class="d-flex" role="search" onsubmit="onNameSubmit()">
+            <input class="form-control me-2" type="search" placeholder="Ingrese si palabra" aria-label="Search" id="texto">
+            <button class="btn btn-outline-success" type="submit" id="buscar">Buscar</button>
+        </form>
+    </div>
+</nav>
+<div class="contenedor">
+    <div class="grafo">
+        <!--iframe style="width: 72vw; height: 60vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Fimagen%20%3Fvideo%20%3Faudio%20%3Fanimal%20%3FanimalLabel%20%3FanimalDescription%20%3Fspecies%20%3FspeciesLabel%20%3Festudio%20%3FestudioLabel%20where%20%7B%0A%20%20%3Fspecies%20wdt%3AP279*%20wd%3AQ622852.%0A%20%20%3Fanimal%20wdt%3AP31%20%3Fspecies.%0A%20%20optional%7B%3Fanimal%20wdt%3AP18%20%3Fimagen%7D%0A%20%20optional%7B%3Fanimal%20wdt%3AP10%20%3Fvideo%7D%0A%20%20optional%7B%3Fanimal%20wdt%3AP51%20%3Faudio%7D%0A%20%20optional%7B%3Fspecies%20wdt%3AP2579%20%3Festudio%7D%0A%20%20service%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20%22es%2Cen%22.%7D%0A%7D%0A" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe-->
+    </div>
+    <div class="datos">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">Animal Forest</h5>
+                <img src="" class="card-img-top" alt="Imagen del Animal" id="Imagen">
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Nombre</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="nombre" aria-label="Disabled input example" id="nombre" disabled>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Especie</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="Especie" aria-label="Disabled input example" id="speciesLabel" disabled>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Descripcion</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="Descripcion" aria-label="Disabled input example" id="animalDescription" disabled>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Estudio</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="Estudio" aria-label="Disabled input example" id="estudioLabel" disabled>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Audio</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="Audio" aria-label="Disabled input example" id="Audio" disabled>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Video</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" placeholder="Video" aria-label="Disabled input example" id="Video" disabled>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="card-body">
+                <a href="grafod3/grafo.html">Grafo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="PiePagina">
+    <p>Creado por Jose Romero. © Derechos Reservados 2022</p>
+</footer>
+    <script src="main.js"></script>
+</body>
+</html>

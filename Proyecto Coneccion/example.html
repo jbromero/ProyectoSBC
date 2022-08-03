@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="mapdiv"></div>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script>
+
+	// Consulta SPARQL
+  	function sparqlQueryJson(queryStr, endpoint, callback, isDebug) {
+      var querypart = "query=" + escape(queryStr);
+      var xmlhttp = null;
+      if(window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+     } else if(window.ActiveXObject) {
+       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+     } 
+     xmlhttp.open('POST', endpoint, true);
+     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+     xmlhttp.setRequestHeader("Accept", "application/sparql-results+json");
+     xmlhttp.onreadystatechange = function() {
+       if(xmlhttp.readyState == 4) {
+         if(xmlhttp.status == 200) {
+           if(isDebug) {
+           		// Ver resultados de la consulta SPARQL
+           	    alert(xmlhttp.responseText);
+           }
+           callback(xmlhttp.responseText);
+         }
+       }
+     };
+     xmlhttp.send(querypart);
+    };
+	
+	// Mapa OSM
+	map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+	var center = new OpenLayers.LonLat( -3.65 ,40.4).transform(
+            new OpenLayers.Projection("EPSG:4326"),
+            map.getProjectionObject()
+          );
+    var zoom=8;
+    map.setCenter (center, zoom);
+	
+	var endpoint = "http://dbpedia.org/sparql";
+    var query = "SELECT * WHERE {?uri geo:lat ?lat .?uri geo:long ?lon .?uri rdf:type ?thetype .FILTER ( (?lat> 40.0  && ?lat < 41.15) &&(?lon> -3  && ?lon < 4)&& regex(?thetype,'^http://schema.org'))}" ;
+    function myCallback(str) {
+		str = eval('(' + str + ')');
+        for(var i = 0; i<  str.results.bindings.length; i++) {
+		  	var la = str.results.bindings[i].lat.value;
+		  	var lo = str.results.bindings[i].lon.value;
+		  	var pos = new OpenLayers.LonLat( la ,lo).transform(
+            	new OpenLayers.Projection("EPSG:4326"),
+            	map.getProjectionObject()
+          	);
+		  	// Añadir al mapa como punto (la, lo)
+        } 
+     }
+    sparqlQueryJson(query, endpoint, myCallback, true);
+</script>
+</body>
+</html>

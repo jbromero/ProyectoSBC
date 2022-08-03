@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Forest</title>
+    <link rel="icon" href="../imagenes/icono.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="../imagenes/icono.png" />
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+    <nav class="navbar bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../imagenes/Logo.png" alt="" width="150" height="40">
+            </a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Ingrese si palabra" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <svg width="960" height="600"></svg>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+      //initilize svg or grab svg
+      var svg = d3.select("svg");
+      var width = svg.attr("width");
+      var height = svg.attr("height");
+
+      var graphData = {
+        nodes: [{ name: "A" }, { name: "B" }, { name: "C" }, { name: "D" }],
+        links: [
+          { source: "A", target: "B" },
+          { source: "B", target: "C" },
+          { source: "D", target: "C" }
+        ]
+      };
+
+      var simulation = d3
+        .forceSimulation(graphData.nodes)
+        .force("charge", d3.forceManyBody().strength(-30))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("link", d3.forceLink(graphData.links).id(d => d.name))
+        .on("tick", ticked);
+
+      var links = svg
+        .append("g")
+        .selectAll("line")
+        .data(graphData.links)
+        .enter()
+        .append("line")
+        .attr("stroke-width", 3)
+        .style("stroke", "orange");
+
+      links.append("text").text(d => d.name);
+
+      var nodes = svg
+        .append("g")
+        .selectAll("circle")
+        .data(graphData.nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 10)
+        .attr("fill", "red");
+
+      var drag = d3
+        .drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+
+      nodes.call(drag);
+
+      function ticked() {
+        //updating the position
+        nodes
+          .attr("cx", function(d) {
+            return d.x;
+          })
+          .attr("cy", function(d) {
+            return d.y;
+          });
+
+        links
+          .attr("x1", function(d) {
+            return d.source.x;
+          })
+          .attr("y1", function(d) {
+            return d.source.y;
+          })
+          .attr("x2", function(d) {
+            return d.target.x;
+          })
+          .attr("y2", function(d) {
+            return d.target.y;
+          });
+        console.log(simulation.alpha());
+      }
+
+      function dragstarted(d) {
+        //your alpha hit 0 it stops! make it run again
+        simulation.alphaTarget(0.3).restart();
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+      }
+      function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+      }
+
+      function dragended(d) {
+        // alpha min is 0, head there
+        simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+    </script>
+
+    <footer class="PiePagina">
+        <p>Creado por Jose Romero. © Derechos Reservados 2022</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

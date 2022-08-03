@@ -1,0 +1,29 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.contenedor{
+	width: 90%;
+	padding: 0 auto;
+	display: grid;
+	grid-template-columns: 80% auto;
+}
+
+.grafo{
+	background-color: white;
+
+}
+
+.datos{
+	background-color: aliceblue;
+	display: flex;
+}
+
+footer.PiePagina{
+	background-color: #1D1D1D;
+	color: #A3A3A3;
+	text-align: center;
+}.PiePagina p{
+	padding: 2em;
+}
